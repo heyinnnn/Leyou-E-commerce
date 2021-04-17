@@ -103,7 +103,7 @@ public class UserService {
             return null;
         }
         // 校验密码
-        if (!user.getPassword().equals(CodecUtils.md5Hex(password, user.getSalt()))) {
+        if (!user.getPassword().equals(password)) {
             return null;
         }
         // 用户名密码都正确

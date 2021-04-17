@@ -2,6 +2,8 @@ package com.leyou.controller;
 
 import com.leyou.service.UserService;
 import com.leyou.user.pojo.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping
 public class UserController {
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -74,6 +77,7 @@ public class UserController {
     ) {
         User user = this.userService.queryUser(username, password);
         if (user == null) {
+            logger.info("错误返回，");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         return ResponseEntity.ok(user);
